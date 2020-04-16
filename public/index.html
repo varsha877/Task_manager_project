@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="expand.js"></script>
+    <script async defer src="script.js"></script>
+
+</head>
+<body onload="todosLoader()">
+    <h1>Todo List Manager</h1>
+
+
+    <div class="col-sm-4">
+        <div style="background-image: url('img.jpg');">
+        <form>
+
+        
+        <h2 class="task_list_heading">Add New Task</h2><br>
+        <fieldset>
+
+            <label for="name">Title:*</label>
+            <input type="text" id="title" name="title" required>
+
+            <label for="description">Description:</label>
+            <input type="text" id="description">
+
+            <label for="duedate">Due Date:*</label>
+            <input type=date id="duedate">
+            <script>
+                document.getElementById('duedate').value = new Date(new Date().getTime() + 24 * 60 * 60 * 1000 - new Date().getTimezoneOffset() * 60 * 1000).toISOString().substr(0,10);
+            </script>
+            
+
+            <label for="priority">Priority:*</label>
+            <select id="priority" name="priority">
+                <option value="1-high">High</option>
+                <option value="2-medium" selected>Medium</option>
+                <option value="3-low">Low</option>
+            </select>
+
+            <label for="status">Status:</label>
+            <select id="status" name="status">
+                <option value="2-incomplete" selected>InComplete</option>
+            </select>
+            <label for="note"> Note </label>
+            <input type="text" id="note">
+
+            <button id="submit">Submit</button>
+        </fieldset>
+        </form>
+        
+
+    </div>
+    </div>
+
+    <label for="sortBy">sort by</label>
+
+    <select id="sortby" onchange="todosLoader()">
+    <option value="duedate">Due Date</option>
+    <option value="priority">Priority</option>
+    <option value="status">Status</option>
+    
+    </select>
+
+
+    <ul id="menu", class="list">
+        
+    </ul>
+
+
+    <div class="modal fade" id="signup">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+ 
+                <!-- Modal Header -->
+                <div class="modal-header" style="color:grey;text-align:center;height:50px;">
+                    <h4 class="modal-title">Edit Details</h4>
+ 
+                </div>
+ 
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <span id="pmsg"></span>
+                    <form>
+ 
+                        <div class="form-group">
+                            <label for="dat">Modify DueDate:*</label>
+                            <input type=date id="update_duedate">
+                        </div>
+ 
+                        <div class=" form-group ">
+                            <label for="priorit ">Change Priority:*</label>
+                            <select id="update_priority">
+                            <option value="1high">High</option>
+                            <option vlaue="2medium" selected>Medium</option>
+                            <option value="3low">Low</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="status">Change Status:</label>
+                            <input type="checkbox"  id="update_incomplete" onclick="onlyOne(this)" selected>InComplete
+                            <input type="checkbox"  id="update_complete" onclick="onlyOne(this)" selected>Complete
+ 
+                        </div>
+                        <script>
+                            function onlyOne(checkbox) {
+                                var checkboxes = document.getElementsByName('check')
+                                checkboxes.forEach((item) => {
+                                    if (item !== checkbox) item.checked = false
+                                })
+                            }
+                        </script>
+ 
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="Submit" class="btn btn-primary" id="editDetails">Update</button>
+                    <button type="Submit" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+                </form>
+ 
+            </div>
+        </div>
+    </div>
+    </div>
+
+</body>
+</html>
